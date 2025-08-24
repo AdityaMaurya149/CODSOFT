@@ -5,58 +5,58 @@ public class NumberGuessingGame {
 
     public static void main(String[] args) {
         
-        Scanner scanner = new Scanner(System.in);
-        Random random = new Random();
+        Scanner inputGetter = new Scanner(System.in);
+        Random numberGenerator = new Random();
 
-        int roundsWon = 0;
-        boolean playAgain;
+        int howManyRoundsWon = 0;
+        boolean wantToPlayMore;
 
         do {
-            int secretNumber = random.nextInt(100) + 1; // Generate number between 1 and 100
-            int attempts = 0;
-            int maxAttempts = 10;
-            boolean guessedCorrectly = false;
+            int theRandomNumberIpicked = numberGenerator.nextInt(100) + 1;
+            int counter_for_my_tries = 0;
+            int max_number_of_attempts = 10;
+            boolean did_i_guess_it = false;
 
             System.out.println("\n--- Welcome to the Number Guessing Game! ---");
-            System.out.println("I have selected a number between 1 and 100. You have " + maxAttempts + " attempts.");
+            System.out.println("I have selected a number between 1 and 100. You have " + max_number_of_attempts + " attempts.");
 
-            while (attempts < maxAttempts) {
+            while (counter_for_my_tries < max_number_of_attempts) {
                 System.out.print("Enter your guess: ");
-                int userGuess;
+                int the_players_guess;
                 try {
-                    userGuess = scanner.nextInt();
-                    scanner.nextLine(); // Consume the newline
-                } catch (Exception e) {
+                    the_players_guess = inputGetter.nextInt();
+                    inputGetter.nextLine();
+                } catch (Exception oh_no_an_error) {
                     System.out.println("Invalid input. Please enter a number.");
-                    scanner.nextLine(); // Clear the invalid input from the scanner
+                    inputGetter.nextLine();
                     continue;
                 }
                 
-                attempts++;
+                counter_for_my_tries++;
 
-                if (userGuess < secretNumber) {
+                if (the_players_guess < theRandomNumberIpicked) {
                     System.out.println("Your guess is too low.");
-                } else if (userGuess > secretNumber) {
+                } else if (the_players_guess > theRandomNumberIpicked) {
                     System.out.println("Your guess is too high.");
                 } else {
-                    System.out.println("Congratulations! You guessed the number in " + attempts + " attempts.");
-                    guessedCorrectly = true;
-                    roundsWon++;
-                    break; // Exit the attempts loop
+                    System.out.println("Congratulations! You guessed the number in " + counter_for_my_tries + " attempts.");
+                    did_i_guess_it = true;
+                    howManyRoundsWon++;
+                    break;
                 }
             }
 
-            if (!guessedCorrectly) {
-                System.out.println("Sorry, you ran out of attempts. The correct number was " + secretNumber + ".");
+            if (!did_i_guess_it) {
+                System.out.println("Sorry, you ran out of attempts. The correct number was " + theRandomNumberIpicked + ".");
             }
 
             System.out.print("Do you want to play again? (yes/no): ");
-            String playAgainInput = scanner.nextLine().toLowerCase();
-            playAgain = playAgainInput.equals("yes");
+            String playAgainInput = inputGetter.nextLine().toLowerCase();
+            wantToPlayMore = playAgainInput.equals("yes");
 
-        } while (playAgain);
+        } while (wantToPlayMore);
 
-        System.out.println("\nThanks for playing! You won " + roundsWon + " round(s).");
-        scanner.close(); // Close the scanner to prevent resource leaks
+        System.out.println("\nThanks for playing! You won " + howManyRoundsWon + " round(s).");
+        inputGetter.close();
     }
 }
