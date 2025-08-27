@@ -23,6 +23,7 @@ public class NumberGuessingGame {
             while (counter_for_my_tries < max_number_of_attempts) {
                 System.out.print("Enter your guess: ");
                 int the_players_guess;
+
                 try {
                     the_players_guess = inputGetter.nextInt();
                     inputGetter.nextLine();
